@@ -3,6 +3,7 @@
 *.dll
 *.so
 *.dylib
+github-activity
 
 # Test binaries
 *_test
@@ -26,3 +27,4 @@ Thumbs.db
 # Logs and temporary files
 *.log
 *.tmp
+
