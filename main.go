@@ -78,7 +78,6 @@ func main() {
 		fmt.Printf("Event Type: %s\n", event.Type)
 		fmt.Printf("User: %s\n", event.Actor.Login)
 		fmt.Printf("Repository: %s\n", event.Repo.Name)
-		fmt.Printf("Time: %s\n", event.CreatedAt)
 
 		if len(event.Payload.Commits) > 0 {
 			fmt.Printf("Commit Message: %s\n", event.Payload.Commits[0].Message)
