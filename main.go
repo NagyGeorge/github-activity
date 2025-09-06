@@ -55,12 +55,12 @@ func main() {
 
 	userName := os.Args[1]
 	fmt.Printf("Looking up activity for: %s\n\n", userName)
-
 	apiURL := "https://api.github.com/users/" + userName + "/events"
 
 	// GET request with error handling
 	res, err := http.Get(apiURL)
 	if err != nil {
+		fmt.Println("Error with GET request")
 		os.Exit(1)
 	}
 	body, err := io.ReadAll(res.Body)
@@ -69,6 +69,7 @@ func main() {
 		fmt.Printf("Response failed with status code: %d\n", res.StatusCode)
 	}
 	if err != nil {
+		fmt.Println("Error with GET request")
 		os.Exit(1)
 	}
 
@@ -86,6 +87,7 @@ func main() {
 			fmt.Printf(userName+" opened PR in repo: %s\n\n", event.Repo.Name)
 			fmt.Println("------------")
 		}
+
 		// fmt.Printf("Event Type: %s\n", event.Type)
 
 		if len(event.Payload.Commits) > 0 {
