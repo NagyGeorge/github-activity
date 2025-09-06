@@ -47,6 +47,7 @@ type GitHubEvent struct {
 }
 
 func main() {
+	// Commandline stuff
 	if len(os.Args) < 2 {
 		fmt.Println("Please provide a Github username")
 		os.Exit(1)
