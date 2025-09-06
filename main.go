@@ -57,6 +57,7 @@ func main() {
 
 	apiURL := "https://api.github.com/users/" + userName + "/events"
 
+	// GET request with error handling
 	res, err := http.Get(apiURL)
 	if err != nil {
 		os.Exit(1)
@@ -73,8 +74,9 @@ func main() {
 	var events []GitHubEvent
 	json.Unmarshal(body, &events)
 
+	// Looping over the JSON structs for output
 	for _, event := range events {
-		if event.Type == "PushEvent" {
+		if event.Type == "PushEvent" { // Getting a suggestion to switch to tagged switching but I can't get it to work
 			fmt.Printf(userName+" commited to: %s\n\n", event.Repo.Name)
 		} else if event.Type == "WatchEvent" {
 			fmt.Printf(userName+" starred: %s\n", event.Repo.Name)
