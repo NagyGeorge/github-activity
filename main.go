@@ -53,10 +53,9 @@ func main() {
 	}
 
 	userName := os.Args[1]
-	fmt.Printf("Looking up activity for: %s\n", userName)
+	fmt.Printf("Looking up activity for: %s\n\n", userName)
 
 	apiURL := "https://api.github.com/users/" + userName + "/events"
-	fmt.Println(apiURL)
 
 	res, err := http.Get(apiURL)
 	if err != nil {
@@ -65,7 +64,7 @@ func main() {
 	body, err := io.ReadAll(res.Body)
 	res.Body.Close()
 	if res.StatusCode > 299 {
-		fmt.Printf("Response failed with status code: %d and\nbody: %s\n", res.StatusCode, body)
+		fmt.Printf("Response failed with status code: %d\n", res.StatusCode)
 	}
 	if err != nil {
 		os.Exit(1)
@@ -75,14 +74,17 @@ func main() {
 	json.Unmarshal(body, &events)
 
 	for _, event := range events {
-		fmt.Printf("Event Type: %s\n", event.Type)
-		fmt.Printf("User: %s\n", event.Actor.Login)
-		fmt.Printf("Repository: %s\n", event.Repo.Name)
+		if event.Type == "PushEvent" {
+			fmt.Printf(userName+" commited to: %s\n\n", event.Repo.Name)
+		} else if event.Type == "WatchEvent" {
+			fmt.Printf(userName+" starred: %s\n", event.Repo.Name)
+			fmt.Println("------------")
+		}
+		// fmt.Printf("Event Type: %s\n", event.Type)
 
 		if len(event.Payload.Commits) > 0 {
-			fmt.Printf("Commit Message: %s\n", event.Payload.Commits[0].Message)
+			fmt.Printf("Commit Message:\n %s\n", event.Payload.Commits[0].Message)
+			fmt.Println("------------")
 		}
-
-		fmt.Println("------------")
 	}
 }
