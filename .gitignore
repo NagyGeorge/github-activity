@@ -1,0 +1,28 @@
+# Binaries for the current OS and architecture
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binaries
+*_test
+
+# Build outputs
+/bin/
+/pkg/
+
+# Dependency management (if not using Go Modules' vendor directory)
+# For Go Modules, 'vendor/' is typically tracked if vendoring is enabled.
+# /vendor/
+
+# IDE and editor specific files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
