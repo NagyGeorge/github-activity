@@ -82,6 +82,9 @@ func main() {
 		} else if event.Type == "WatchEvent" {
 			fmt.Printf(userName+" starred: %s\n", event.Repo.Name)
 			fmt.Println("------------")
+		} else if event.Type == "PullRequestEvent" {
+			fmt.Printf(userName+" opened PR in repo: %s\n\n", event.Repo.Name)
+			fmt.Println("------------")
 		}
 		// fmt.Printf("Event Type: %s\n", event.Type)
 
